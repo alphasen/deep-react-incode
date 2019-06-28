@@ -1,0 +1,15 @@
+.tab-header{
+    span{
+        display: inline-block;
+        background: #ddd;
+        border:1px solid #eee;
+        padding:5px;
+        cursor: pointer;
+        &:hover{
+            background: #fff;
+        }
+        &.active{
+            background: #fff;
+        }
+    }
+}
