@@ -1,3 +1,7 @@
+/**
+ * css modules 示例
+ * https://www.kancloud.cn/kancloud/css_modules/232905
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
