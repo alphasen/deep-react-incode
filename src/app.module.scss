@@ -1,0 +1,37 @@
+@value gn:green;
+
+.blue{
+    color:blue;
+    span{
+        color:green;
+    }
+    .yellow{
+        color:yellow;
+    }
+}
+
+.green{
+    composes:green from './App.css';
+}
+
+.font{
+    font-size: 88px;
+    line-height: 100px;
+}
+
+.compose{
+    composes:blue;
+    composes:font;
+    background: red;
+}
+
+.variable-green{
+    color:gn;
+}
+
+:global{
+    .bg{
+        background: #eee;
+        margin:0 200px;
+    }
+}
