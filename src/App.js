@@ -1,29 +1,49 @@
-import React,{Component} from 'react';
+import React,{Component,useEffect} from 'react';
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import {pure} from 'recompose'
 
-class App extends Component{
-    static propTypes={
+window.addEventListener("click", event => {
+  console.log("window");
+});
 
-    }
+document.addEventListener("click", event => {
+    event.stopImmediatePropagation()
+  console.log("document:bedore react mount");
+});
 
-    static defaultProps={
+document.body.addEventListener("click", event => {
+  console.log("body");
+});
 
-    }
+function App() {
+  function documentHandler() {
+    console.log("document within react");
+  }
 
-    constructor(props){
-        super(props)
-        this.state={
+  useEffect(() => {
+    document.addEventListener("click", documentHandler);
+    return () => {
+      document.removeEventListener("click", documentHandler);
+    };
+  }, []);
 
-        }
-    }
-
-    render(){
-        return <div>
-
-        </div>
-    }
+  return (
+    <div
+      onClick={() => {
+        console.log("raect:container");
+      }}
+    >
+      <button
+        onClick={event => {
+        //   event.stopPropagation();
+          console.log("react:button");
+        }}
+      >
+        CLICK ME
+      </button>
+    </div>
+  );
 }
 
 export default App;
