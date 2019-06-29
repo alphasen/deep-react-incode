@@ -19,7 +19,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex:0
+            activeIndex:'0'
         };
     }
 
@@ -27,15 +27,20 @@ class App extends Component {
         return (
             <div>
                 <button onClick={()=>this.setState({
-                    activeIndex:2
+                    activeIndex:'2'
                 })}>open tab 3</button>
                 <button onClick={()=>this.setState({
-                    activeIndex:1
+                    activeIndex:'1'
                 })}>open tab 2</button>
                 <Tabs
-                    defaultActiveIndex={this.state.activeIndex}
+                    activeIndex={this.state.activeIndex}
                     className="tabs-bar"
-                    key={Math.random()}
+                    // key={Math.random()}
+                    onChange={(activeIndex)=>{
+                        this.setState({
+                            activeIndex
+                        })
+                    }}
                 >
                     <TabPane order="0" tab={'Tab 1'}>
                         <span>1.xxx</span>

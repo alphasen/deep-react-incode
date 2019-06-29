@@ -13,9 +13,8 @@ class Tabs extends Component {
             PropTypes.arrayOf(PropTypes.node),
             PropTypes.node
         ]),
-        defaultActiveIndex: PropTypes.number,
-        activeIndex: PropTypes.number,
-        onChange: PropTypes.func
+        activeIndex: PropTypes.string.isRequired,
+        onChange: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -25,46 +24,34 @@ class Tabs extends Component {
 
     constructor(props) {
         super(props);
-        let activeIndex;
-        if ('activeIndex' in props) {
-            activeIndex = props.activeIndex;
-        } else if ('defaultActiveIndex' in props) {
-            activeIndex = props.defaultActiveIndex;
-        }
         this.state = {
-            activeIndex,
-            preActiveIndex: activeIndex, // 上次打开的tab index
-            props:{}
         };
-        console.log('this.state :', this.state);
     }
 
     // 该方法禁止访问 this.props 确保当开发者用到 getDerivedStateFromProps 这个生命周期函数时，就是在根据当前的 props 来更新组件的 state，而不是去做其他一些让组件自身状态变得更加不可预测的事情
     // https://zhuanlan.zhihu.com/p/36062486
     // 该方法很难用 https://www.jianshu.com/p/cafe8162b4a8 应该尽量避免使用
     static getDerivedStateFromProps(nextProps, preState) {
-        return null
+        // state 变化也会触发该函数
+        // 为避免内部state变化时该函数无法响应，最好的做法是在触发state变化时，也顺道将父组件传进来的props一并修改 eg:handleTabClick操作后更改了父组件的props this.props.onChange(activeIndex, preActiveIndex);
+        // console.log('nextProps :', nextProps);
+        // console.log('preState :', preState);
+        // if(nextProps.defaultActiveIndex!=preState.activeIndex){
+        //     return {
+        //         activeIndex:nextProps.defaultActiveIndex
+        //     }
+        // }
+        // return null
     }
-
-    handleTabClick = activeIndex => {
-        const preActiveIndex = this.state.activeIndex;
-        if (activeIndex !== preActiveIndex) {
-            this.setState({
-                activeIndex,
-                preActiveIndex
-            });
-            this.props.onChange(activeIndex, preActiveIndex);
-        }
-    };
 
     renderTabNav() {
         const { classPrefix, children } = this.props;
         return (
             <TabNav
-                onTabClick={this.handleTabClick}
+                onTabClick={this.props.onChange}
                 classPrefix={classPrefix}
                 panes={children}
-                activeIndex={this.state.activeIndex}
+                activeIndex={this.props.activeIndex}
             />
         );
     }
@@ -76,7 +63,7 @@ class Tabs extends Component {
                 classPrefix={classPrefix}
                 className="tab-content"
                 panes={children}
-                activeIndex={this.state.activeIndex}
+                activeIndex={this.props.activeIndex}
             />
         );
     }
@@ -84,6 +71,7 @@ class Tabs extends Component {
     render() {
         const { className } = this.props;
         const classes = classnames(className, 'ui-tabs');
+        console.log('render');
         return (
             <div className={classes}>
                 {this.renderTabNav()}

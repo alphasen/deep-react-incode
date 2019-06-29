@@ -18,7 +18,7 @@ class TabNav extends Component {
                     return (
                         <span
                             onClick={() =>
-                                this.props.onTabClick(pane.props.order)
+                                pane.props.order!=activeIndex&&this.props.onTabClick(pane.props.order)
                             }
                             key={pane.props.tab}
                             className={
