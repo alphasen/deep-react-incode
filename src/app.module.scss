@@ -1,5 +1,8 @@
-@value gn:green;
+@import './colors.css';
 
+:root{
+    --gn:yellow;
+}
 .blue{
     color:blue;
     span{
@@ -22,11 +25,11 @@
 .compose{
     composes:blue;
     composes:font;
-    background: red;
+    background: var(--color-red);
 }
 
 .variable-green{
-    color:gn;
+    color:var(--gn);
 }
 
 :global{
