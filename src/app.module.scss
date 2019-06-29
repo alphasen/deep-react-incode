@@ -1,4 +1,8 @@
+// scss 语法 https://www.jianshu.com/p/3259976b414b
 @import './colors.css';
+$bl:black;
+$color:black green red;
+$vg:variable-green;
 
 :root{
     --gn:yellow;
@@ -28,8 +32,10 @@
     background: var(--color-red);
 }
 
-.variable-green{
-    color:var(--gn);
+.#{$vg}{ // scss变量使用在选择器上的形式
+    color:var(--gn); // css 变量
+    background: $bl; // scss 变量
+    border:solid 1px nth($color,2); // scss 多值变量的使用方式
 }
 
 :global{
