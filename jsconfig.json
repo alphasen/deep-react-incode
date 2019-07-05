@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "baseUrl": "src",
+        "paths": {
+            "common/*": [
+                "common/*"
+            ],
+            "img/*": [
+                "common/img/*"
+            ],
+            "svg/*": [
+                "common/svg/*"
+            ],
+            "views/*": [
+                "views/*"
+            ],
+            "apis/*": [
+                "api/*"
+            ],
+            "axios2$": [
+                "common/js/axios2.js"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "include": [
+        "src"
+    ]
+}

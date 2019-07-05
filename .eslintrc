@@ -1,0 +1,8 @@
+// 要想eslint生效，需要 eslint-plugin-html (yarn add -D eslint-plugin-html)
+{
+    "extends": "react-app",
+    "rules": {
+        "eqeqeq":"off", // 关闭必须使用 ===
+        "no-unused-vars":"off", // 关闭未使用的声明的警告
+    }
+}
